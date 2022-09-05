@@ -57,16 +57,34 @@ module.exports = {
         // },
         // Useful for deploying to a public network.
         // NB: It's important to wrap the provider as a function.
-        mainnet: {
+		eth: {
+            provider: () => new HDWalletProvider(mnemonic, `https://mainnet.infura.io/v3/e70401c0ae464daba288805f7db6c511`),
+            network_id: 1,       // mainnet
+            gas: 5500000,        // mainnet has a lower block limit than mainnet
+            confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+            timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+            skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
+        },
+
+        ethtest: {
+            provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/e70401c0ae464daba288805f7db6c511`),
+            network_id: 5,       // goerli's id
+            gas: 5500000,        // goerli has a lower block limit than mainnet
+            confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+            timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+            skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+        },
+
+        bsc: {
             provider: () => new HDWalletProvider(mnemonic, `https://bsc-dataseed.binance.org/`),
-            network_id: 56,       // Ropsten's id
+            network_id: 56,       // BSC mainnet 's id
             gas: 5500000,        // Ropsten has a lower block limit than mainnet
             confirmations: 2,    // # of confs to wait between deployments. (default: 0)
             timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
             skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
         },
 
-        testnet: {
+        bsctest: {
             provider: () => new HDWalletProvider(mnemonic, `https://data-seed-prebsc-1-s1.binance.org:8545/`),
             network_id: 97,       // Ropsten's id
             gas: 5500000,        // Ropsten has a lower block limit than mainnet
