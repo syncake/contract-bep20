@@ -66,7 +66,16 @@ module.exports = {
             skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
         },
 
-        ethtest: {
+        ropsten: {
+            provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/e70401c0ae464daba288805f7db6c511`),
+            network_id: 3,       // goerli's id
+            gas: 5500000,        // goerli has a lower block limit than mainnet
+            confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+            timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+            skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+        },
+
+        goerli: {
             provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/e70401c0ae464daba288805f7db6c511`),
             network_id: 5,       // goerli's id
             gas: 5500000,        // goerli has a lower block limit than mainnet
@@ -112,7 +121,7 @@ module.exports = {
             // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
             settings: {          // See the solidity docs for advice about optimization and evmVersion
                 optimizer: {
-                    enabled: false,
+                    enabled: true,
                     runs: 200
                 },
                 //  evmVersion: "byzantium"
@@ -124,8 +133,15 @@ module.exports = {
 		"truffle-plugin-verify"
 	],
 	api_keys: {
-		etherscan: '1PY674ZYVZ3QEZG92RKS5RAXUEMHRG85N2'
-	}
+        etherscan: 'XFF6HVQ3BYFG6W31CUH5KGGMN3FPTGJQH6'
+	},
+    // http proxy
+    verify: {
+        proxy: {
+            host: '127.0.0.1',
+            port: '1090',
+        }
+    }
     // Truffle DB is currently disabled by default; to enable it, change enabled:
     // false to enabled: true. The default storage location can also be
     // overridden by specifying the adapter settings, as shown in the commented code below.
