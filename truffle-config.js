@@ -134,7 +134,7 @@ module.exports = {
 	],
 	api_keys: {
         etherscan: 'XFF6HVQ3BYFG6W31CUH5KGGMN3FPTGJQH6',
-        bsctest: 'TQFBIUPMIDT7SK1C9T3BQHCKGA86CXGBY3'
+        testnet_bscscan: 'TQFBIUPMIDT7SK1C9T3BQHCKGA86CXGBY3'
 	},
     // http proxy
     verify: {
